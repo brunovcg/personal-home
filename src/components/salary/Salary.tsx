@@ -66,6 +66,7 @@ export default function Salary() {
                         st.company === item.company
                           ? {
                               ...st,
+                              real: Number(event.target.value) * item.value,
                               rating: Number(event.target.value),
                             }
                           : { ...st }
@@ -84,6 +85,7 @@ export default function Salary() {
                         st.company === item.company
                           ? {
                               ...st,
+                              real: item.rating * Number(event.target.value),
                               value: Number(event.target.value),
                             }
                           : { ...st }
