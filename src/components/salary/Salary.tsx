@@ -4,21 +4,27 @@ import Currency from "../../services/currency/Currency";
 
 export default function Salary() {
   const [data, setData] = useState([
-    { company: "Investor", value: 5500, currency: "USD", real: 0 },
-    { company: "Mate", value: 1900, currency: "EUR", real: 0 },
+    { company: "In", value: 5500, currency: "USD", rating: 0, real: 0 },
+    { company: "Ma", value: 1900, currency: "EUR", rating: 0, real: 0 },
   ]);
+
+  const calculate = (value: number, currencyValue: number) =>
+    parseFloat((value / currencyValue).toFixed(2));
 
   useEffect(() => {
     Currency.getBRL()
       .then((res) => res.json())
       .then((res) =>
         setData((state) =>
-          state.map((cur) => ({
-            ...cur,
-            real: parseFloat(
-              (cur.value / res.conversion_rates[cur.currency]).toFixed(2)
-            ),
-          }))
+          state.map((cur) => {
+            const rating = calculate(1, res.conversion_rates[cur.currency]);
+
+            return {
+              ...cur,
+              rating,
+              real: rating * cur.value,
+            };
+          })
         )
       );
   }, []);
@@ -33,6 +39,7 @@ export default function Salary() {
         <div className="bg-salary__header bg-salary__header-currency">
           Moeda
         </div>
+        <div className="bg-salary__header bg-salary__header-rating">Rate</div>
         <div className="bg-salary__header bg-salary__header-real">Real</div>
         {data.map((item) => {
           const entries = Object.entries(item);
@@ -42,12 +49,51 @@ export default function Salary() {
               key={`${item.company}-${key}`}
               className={`bg-salary__cell bg-salary__${item.company}-${key}`}
             >
-              {key === "real"
-                ? value.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })
-                : value}
+              {key === "real" ? (
+                (item.rating * item.value).toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })
+              ) : key === "rating" ? (
+                <input
+                  className="rating-input"
+                  type="number"
+                  step="0.1"
+                  value={value}
+                  onChange={(event) =>
+                    setData((state) =>
+                      state.map((st) =>
+                        st.company === item.company
+                          ? {
+                              ...st,
+                              rating: Number(event.target.value),
+                            }
+                          : { ...st }
+                      )
+                    )
+                  }
+                />
+              ) : key === "value" ? (
+                <input
+                  className="value-input"
+                  type="number"
+                  value={value}
+                  onChange={(event) =>
+                    setData((state) =>
+                      state.map((st) =>
+                        st.company === item.company
+                          ? {
+                              ...st,
+                              value: Number(event.target.value),
+                            }
+                          : { ...st }
+                      )
+                    )
+                  }
+                />
+              ) : (
+                value
+              )}
             </div>
           ));
         })}

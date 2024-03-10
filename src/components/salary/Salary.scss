@@ -3,19 +3,19 @@
   grid-template-columns: repeat(4, 100px);
   grid-template-rows: repeat(4, 40px);
   grid-template-areas:
-    "company value currency real"
-    "Investor-company Investor-value Investor-currency Investor--real"
-    "Mate-company Mate-value Mate-currency Mate-real"
-    "total total total total-value";
+    "company value currency rating real"
+    "In-company In-value In-currency In-rating In--real"
+    "Ma-company Ma-value Ma-currency Ma-rating Ma-real"
+    "total total total total-value total-value";
   width: fit-content;
   font-size: 14px;
 
   .bg-salary__header {
-    $headers: company, value, currency, real;
+    $headers: company, value, currency, rating, real;
     font-weight: bold;
     text-align: center;
     line-height: 40px;
-    border: 1px solid grey;
+    min-width: 120px;
 
     @each $header in $headers {
       &-#{$header} {
@@ -27,16 +27,30 @@
   .bg-salary__cell {
     text-align: center;
     line-height: 40px;
+    min-width: 120px;
+
+    input {
+      padding-left: 5px;
+    }
+
+    .rating-input {
+      width: 60px;
+    }
+
+    .value-input {
+      width: 60px;
+    }
   }
 
   .bg-salary-total {
     grid-area: total;
-    background-color: grey;
-    color: white;
+    font-weight: bold;
+    color: gray;
   }
 
   .bg-salary-total-value {
     grid-area: total-value;
-    border: 1px solid grey;
+    color: green;
+    font-weight: bold;
   }
 }
