@@ -4,8 +4,9 @@ import Currency from "../../services/currency/Currency";
 
 export default function Salary() {
   const [data, setData] = useState([
-    { company: "In", value: 5500, currency: "USD", rating: 0, real: 0 },
-    { company: "Ma", value: 1900, currency: "EUR", rating: 0, real: 0 },
+    { company: "IM", value: 5500, currency: "USD", rating: 0, real: 0 },
+    { company: "MA", value: 1900, currency: "EUR", rating: 0, real: 0 },
+    { company: "RL", value: 21000, currency: "BRL", rating: 0, real: 0 },
   ]);
 
   const calculate = (value: number, currencyValue: number) =>
