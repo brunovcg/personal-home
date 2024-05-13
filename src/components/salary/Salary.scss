@@ -4,8 +4,9 @@
   grid-template-rows: repeat(4, 40px);
   grid-template-areas:
     "company value currency rating real"
-    "In-company In-value In-currency In-rating In--real"
-    "Ma-company Ma-value Ma-currency Ma-rating Ma-real"
+    "IM-company IM-value IM-currency IM-rating IM--real"
+    "MA-company MA-value MA-currency MA-rating MA-real"
+    "RL-company RL-value RL-currency RL-rating RL-real"
     "total total total total-value total-value";
   width: fit-content;
   font-size: 14px;
