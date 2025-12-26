@@ -1,0 +1,96 @@
+.bg-salary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.bg-salary__rates-table {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border-bottom: 1px solid #eee;
+      padding: 5px;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #fff;
+    }
+
+    .rate-input {
+      width: 80px;
+      padding: 5px;
+    }
+  }
+}
+
+.bg-salary__container {
+  width: fit-content;
+  font-size: 14px;
+
+  .bg-salary__company-table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th, td {
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+  }
+
+  .bg-salary__header {
+    font-weight: bold;
+    min-width: 120px;
+  }
+
+  .bg-salary__cell {
+    min-width: 120px;
+
+    input {
+      padding-left: 5px;
+    }
+
+    select {
+      margin-top: 5px;
+    }
+
+    .rating-input {
+      width: 60px;
+    }
+
+    .value-input {
+      width: 60px;
+    }
+  }
+
+  .bg-salary-total {
+    font-weight: bold;
+    color: gray;
+    text-align: right; /* total label aligned right */
+  }
+
+  .bg-salary-total-value {
+    color: green;
+    font-weight: bold;
+  }
+}

@@ -1,9 +1,12 @@
-import Salary from "./components/salary/Salary";
+import { Suspense } from 'react';
+import { SalaryPage } from './pages/salary/Salary.page';
 
-export default function App() {
+export function App() {
   return (
     <div className="App">
-      <Salary />
+      <Suspense fallback={<div>Loading...</div>}>
+        <SalaryPage />
+      </Suspense>
     </div>
   );
 }
