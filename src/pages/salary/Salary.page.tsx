@@ -68,12 +68,16 @@ export function SalaryPage() {
               <tr key={currency}>
                 <td>{currency}</td>
                 <td>
-                  <InputNumber
-                    className="rate-input"
-                    step="0.01"
-                    value={rates[currency]}
-                    onChange={(e) => updateRate(currency, Number(e.target.value))}
-                  />
+                  {currency === 'BRL' ? (
+                    '1'
+                  ) : (
+                    <InputNumber
+                      className="rate-input"
+                      step="0.01"
+                      value={rates[currency]}
+                      onChange={(e) => updateRate(currency, Number(e.target.value))}
+                    />
+                  )}
                 </td>
               </tr>
             ))}
