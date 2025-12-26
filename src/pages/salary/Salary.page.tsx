@@ -112,12 +112,18 @@ export function SalaryPage() {
               return (
                 <tr key={`${item.company}-row`}>
                   {/* Company */}
-                  <td className={`bg-salary__cell bg-salary__${item.company}-company`}>
+                  <td 
+                    className={`bg-salary__cell bg-salary__${item.company}-company`}
+                    data-label="Empresa"
+                  >
                      {item.company}
                   </td>
 
                    {/* Value */}
-                   <td className={`bg-salary__cell bg-salary__${item.company}-value`}>
+                   <td 
+                    className={`bg-salary__cell bg-salary__${item.company}-value`}
+                    data-label="Valor"
+                   >
                     <InputNumber
                       className="value-input"
                       value={item.value}
@@ -126,7 +132,10 @@ export function SalaryPage() {
                    </td>
 
                    {/* Currency */}
-                   <td className={`bg-salary__cell bg-salary__${item.company}-currency`}>
+                   <td 
+                    className={`bg-salary__cell bg-salary__${item.company}-currency`}
+                    data-label="Moeda"
+                   >
                  
                     <Select
                       value={item.currency}
@@ -137,12 +146,18 @@ export function SalaryPage() {
                    </td>
 
                    {/* Rate */}
-                   <td className={`bg-salary__cell bg-salary__${item.company}-rating`}>
+                   <td 
+                    className={`bg-salary__cell bg-salary__${item.company}-rating`}
+                    data-label="Rate"
+                   >
                      {rate.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                    </td>
 
                    {/* Real */}
-                   <td className={`bg-salary__cell bg-salary__${item.company}-real`}>
+                   <td 
+                    className={`bg-salary__cell bg-salary__${item.company}-real`}
+                    data-label="Real"
+                   >
                      {realValue.toLocaleString('pt-BR', {
                       style: 'currency',
                       currency: 'BRL',

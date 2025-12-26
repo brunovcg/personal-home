@@ -11,7 +11,8 @@
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   background-color: #fff;
   border-radius: 8px;
 
@@ -44,8 +45,10 @@
 }
 
 .bg-salary__container {
-  width: fit-content;
+  width: 100%;
+  max-width: 800px; /* added max-width for consistency */
   font-size: 14px;
+  overflow-x: auto; /* handle small overflows gracefully */
 
   .bg-salary__company-table {
     width: 100%;
@@ -86,11 +89,86 @@
   .bg-salary-total {
     font-weight: bold;
     color: gray;
-    text-align: right; /* total label aligned right */
+    text-align: right; 
   }
 
   .bg-salary-total-value {
     color: green;
     font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+  .bg-salary__container {
+    .bg-salary__company-table {
+      thead {
+        display: none; /* Hide headers */
+      }
+
+      tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        background: #fff;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        min-width: auto; /* reset min-width */
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &::before {
+          content: attr(data-label);
+          font-weight: bold;
+          text-align: left;
+          color: #555;
+          margin-right: 15px;
+        }
+      }
+      
+      tfoot {
+         /* Keep total visible but adjust layout if needed */
+         tr {
+           display: table-row; /* revert to table-row for tfoot if strictly desired, OR keep block */
+           border: none;
+           background: transparent;
+           box-shadow: none;
+         }
+         td {
+            display: table-cell; /* or flex depending on look */
+            text-align: center;
+            width: 100%;
+            border: none;
+            
+             &::before {
+               display: none;
+             }
+         }
+         
+         /* Special handling for tfoot on mobile to make it look like a summary block */
+         .bg-salary-total {
+            display: block;
+            text-align: center;
+            padding-bottom: 0;
+         }
+         
+         .bg-salary-total-value {
+             display: block;
+             text-align: center;
+             font-size: 1.2em;
+             padding-top: 5px;
+         }
+      }
+    }
   }
 }
