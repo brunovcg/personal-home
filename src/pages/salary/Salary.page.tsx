@@ -30,6 +30,14 @@ export function SalaryPage() {
     { company: 'TE', value: 4580, currency: 'USD' },
   ]);
 
+  const addCompany = () => {
+    setCompanies((prev) => [...prev, { company: '', value: 0, currency: 'USD' }]);
+  };
+
+  const removeCompany = (index: number) => {
+    setCompanies((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const updateRate = (currency: string, newRate: number) => {
     setRates((prev) => ({
       ...prev,
@@ -102,6 +110,7 @@ export function SalaryPage() {
                 Rate
               </th>
               <th className="bg-salary__header bg-salary__header-real">Real</th>
+              <th className="bg-salary__header"></th>
             </tr>
           </thead>
           <tbody>
@@ -112,11 +121,15 @@ export function SalaryPage() {
               return (
                 <tr key={`${item.company}-row`}>
                   {/* Company */}
-                  <td 
+                  <td
                     className={`bg-salary__cell bg-salary__${item.company}-company`}
                     data-label="Empresa"
                   >
-                     {item.company}
+                     <input
+                       className="company-input"
+                       value={item.company}
+                       onChange={(e) => updateCompany(index, 'company', e.target.value)}
+                     />
                   </td>
 
                    {/* Value */}
@@ -154,7 +167,7 @@ export function SalaryPage() {
                    </td>
 
                    {/* Real */}
-                   <td 
+                   <td
                     className={`bg-salary__cell bg-salary__${item.company}-real`}
                     data-label="Real"
                    >
@@ -163,6 +176,11 @@ export function SalaryPage() {
                       currency: 'BRL',
                     })}
                    </td>
+
+                   {/* Remove */}
+                   <td className="bg-salary__cell">
+                     <button className="remove-btn" onClick={() => removeCompany(index)}>✕</button>
+                   </td>
                 </tr>
               );
             })}
@@ -170,12 +188,14 @@ export function SalaryPage() {
           <tfoot>
              <tr>
                <td colSpan={4} className="bg-salary__cell bg-salary-total">Total BRL</td>
+               <td></td>
                <td className="bg-salary__cell bg-salary-total-value">
                   {totalReal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                </td>
              </tr>
           </tfoot>
         </table>
+        <button className="add-btn" onClick={addCompany}>+ Add</button>
       </div>
     </div>
   );

@@ -89,12 +89,46 @@
   .bg-salary-total {
     font-weight: bold;
     color: gray;
-    text-align: right; 
+    text-align: right;
   }
 
   .bg-salary-total-value {
     color: green;
     font-weight: bold;
+  }
+
+  .company-input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .remove-btn {
+    background: none;
+    border: none;
+    color: #cc0000;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 8px;
+
+    &:hover {
+      color: #ff0000;
+    }
+  }
+
+  .add-btn {
+    margin-top: 10px;
+    padding: 6px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background: #45a049;
+    }
   }
 }
 
