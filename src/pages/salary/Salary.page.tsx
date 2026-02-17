@@ -19,7 +19,9 @@ export function SalaryPage() {
   const [rates, setRates] = useState(() => {
     const initialRates: Record<string, number> = {};
     currencyList.forEach((currency) => {
-      const apiRate = res.conversion_rates[currency as keyof typeof res.conversion_rates] || 1;
+      const apiRate =
+        res.conversion_rates[currency as keyof typeof res.conversion_rates] ||
+        1;
       initialRates[currency] = calculate(1, apiRate);
     });
     return initialRates;
@@ -31,7 +33,10 @@ export function SalaryPage() {
   ]);
 
   const addCompany = () => {
-    setCompanies((prev) => [...prev, { company: '', value: 0, currency: 'USD' }]);
+    setCompanies((prev) => [
+      ...prev,
+      { company: '', value: 0, currency: 'USD' },
+    ]);
   };
 
   const removeCompany = (index: number) => {
@@ -45,7 +50,11 @@ export function SalaryPage() {
     }));
   };
 
-  const updateCompany = (index: number, field: string, value: string | number) => {
+  const updateCompany = (
+    index: number,
+    field: string,
+    value: string | number,
+  ) => {
     setCompanies((prev) =>
       prev.map((c, i) => (i === index ? { ...c, [field]: value } : c)),
     );
@@ -83,7 +92,9 @@ export function SalaryPage() {
                       className="rate-input"
                       step="0.01"
                       value={rates[currency]}
-                      onChange={(e) => updateRate(currency, Number(e.target.value))}
+                      onChange={(e) =>
+                        updateRate(currency, Number(e.target.value))
+                      }
                     />
                   )}
                 </td>
@@ -98,13 +109,13 @@ export function SalaryPage() {
           <thead>
             <tr>
               <th className="bg-salary__header bg-salary__header-company">
-                Empresa
+                Unit
               </th>
               <th className="bg-salary__header bg-salary__header-value">
-                Valor
+                Amount
               </th>
               <th className="bg-salary__header bg-salary__header-currency">
-                Moeda
+                Currency
               </th>
               <th className="bg-salary__header bg-salary__header-rating">
                 Rate
@@ -123,79 +134,97 @@ export function SalaryPage() {
                   {/* Company */}
                   <td
                     className={`bg-salary__cell bg-salary__${item.company}-company`}
-                    data-label="Empresa"
+                    data-label="Unit"
                   >
-                     <input
-                       className="company-input"
-                       value={item.company}
-                       onChange={(e) => updateCompany(index, 'company', e.target.value)}
-                     />
+                    <input
+                      className="company-input"
+                      value={item.company}
+                      onChange={(e) =>
+                        updateCompany(index, 'company', e.target.value)
+                      }
+                    />
                   </td>
 
-                   {/* Value */}
-                   <td 
+                  {/* Value */}
+                  <td
                     className={`bg-salary__cell bg-salary__${item.company}-value`}
-                    data-label="Valor"
-                   >
+                    data-label="Amount"
+                  >
                     <InputNumber
                       className="value-input"
                       value={item.value}
-                      onChange={(e) => updateCompany(index, 'value', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateCompany(index, 'value', Number(e.target.value))
+                      }
                     />
-                   </td>
+                  </td>
 
-                   {/* Currency */}
-                   <td 
+                  {/* Currency */}
+                  <td
                     className={`bg-salary__cell bg-salary__${item.company}-currency`}
-                    data-label="Moeda"
-                   >
-                 
+                    data-label="Currency"
+                  >
                     <Select
                       value={item.currency}
-                      onChange={(e) => updateCompany(index, 'currency', e.target.value)}
+                      onChange={(e) =>
+                        updateCompany(index, 'currency', e.target.value)
+                      }
                       options={displayedCurrencies}
                     />
-                 
-                   </td>
+                  </td>
 
-                   {/* Rate */}
-                   <td 
+                  {/* Rate */}
+                  <td
                     className={`bg-salary__cell bg-salary__${item.company}-rating`}
                     data-label="Rate"
-                   >
-                     {rate.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                   </td>
+                  >
+                    {rate.toLocaleString('pt-BR', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
 
-                   {/* Real */}
-                   <td
+                  {/* Real */}
+                  <td
                     className={`bg-salary__cell bg-salary__${item.company}-real`}
                     data-label="Real"
-                   >
-                     {realValue.toLocaleString('pt-BR', {
+                  >
+                    {realValue.toLocaleString('pt-BR', {
                       style: 'currency',
                       currency: 'BRL',
                     })}
-                   </td>
+                  </td>
 
-                   {/* Remove */}
-                   <td className="bg-salary__cell">
-                     <button className="remove-btn" onClick={() => removeCompany(index)}>✕</button>
-                   </td>
+                  {/* Remove */}
+                  <td className="bg-salary__cell">
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeCompany(index)}
+                    >
+                      ✕
+                    </button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
           <tfoot>
-             <tr>
-               <td colSpan={4} className="bg-salary__cell bg-salary-total">Total BRL</td>
-               <td></td>
-               <td className="bg-salary__cell bg-salary-total-value">
-                  {totalReal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-               </td>
-             </tr>
+            <tr>
+              <td colSpan={5} className="bg-salary__cell bg-salary-total">
+                Total REAL
+              </td>
+              <td className="bg-salary__cell bg-salary-total-value">
+                {totalReal.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </td>
+            </tr>
           </tfoot>
         </table>
-        <button className="add-btn" onClick={addCompany}>+ Add</button>
+        <button className="add-btn" onClick={addCompany}>
+          + Add
+        </button>
       </div>
     </div>
   );
